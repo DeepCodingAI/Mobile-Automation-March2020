@@ -28,9 +28,10 @@ public class CommonAPI {
     public DesiredCapabilities cap = null;
     public static File appDirectory = null;
     public static File findApp = null;
-    @Parameters({"OS","appType","deviceType","deviceName","version","appName"})
+    @Parameters({"OS","appType","deviceType","deviceName","version","moduleName","appName"})
     @BeforeMethod
-    public void setUp(String OS,String appType,String deviceType,String deviceName, String version, String appName) throws MalformedURLException {
+    public void setUp(String OS,String appType,String deviceType,String deviceName, String version,String moduleName,
+                      String appName) throws MalformedURLException {
         if(OS.equalsIgnoreCase("iOS")){
             //handle IOS
             if(OS.equalsIgnoreCase("Phone")){
@@ -66,8 +67,8 @@ public class CommonAPI {
         }else if(OS.equalsIgnoreCase("Android")){
             //Handle Android
             if(appType.equalsIgnoreCase("Phone")){
-                appDirectory = new File("NYP/src/app");
-                findApp = new File("/Users/mrahman/develop/deepcoding/MobileAutomationMarch2020/NYP/src/app/nyp-v3.apk");
+                appDirectory = new File(moduleName + "/src/app");
+                findApp = new File(appDirectory,appName);
                 if(deviceType.equalsIgnoreCase("realDevice")){
                     cap = new DesiredCapabilities();
                     cap.setCapability(MobileCapabilityType.DEVICE_NAME, deviceName);
